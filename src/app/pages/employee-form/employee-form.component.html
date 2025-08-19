@@ -1,0 +1,83 @@
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header bg-warning">
+            New Employee Form
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6">
+                    <label for="">Name</label>
+                    <input type="text" [(ngModel)]="employeeObj.fullname" class="form-control" placeholder="Enter Your Name">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <label for="">Email</label>
+                    <input type="text" [(ngModel)]="employeeObj.email" class="form-control" placeholder="Enter Your Email">
+                </div>
+                <div class="col-3">
+                    <label for="">Phone</label>
+                    <input type="text" [(ngModel)]="employeeObj.phone" class="form-control" placeholder="Enter Your Phone">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <label for="">Gender</label>
+                    <br>
+                    <input type="radio" [(ngModel)]="employeeObj.gender" name="gender" value="male">Male
+                    <input type="radio" [(ngModel)]="employeeObj.gender" name="gender" value="female">Female
+                </div>
+                <div class="col-3">
+                    <label for="">Date of Joining</label>
+                    <input type="date" [(ngModel)]="employeeObj.dateOfJoining" class="form-control" placeholder="Enter Your Joining Date">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <label for="">Department</label>
+                    <select (change)="getDesignation()" [(ngModel)]="employeeObj.departmentId" class="form-control">
+                        <option value="">--Select Department--</option>
+                        <option *ngFor="let dept of deptList$ | async" [value]="dept.departmentId">{{dept.departmentName}}</option>
+                    </select>
+                </div>
+                <div class="col-3">
+                    <label for="">Designation</label>
+                    <select [(ngModel)]="employeeObj.designationId" class="form-control">
+                        <option value="">--Select Designation--</option>\
+                        @for (item of designationList; track $index) {
+                            <option [value]="item.designationId">{{item.designationName}}</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <label for="">Employee Type</label>
+                    <select [(ngModel)]="employeeObj.employeeType" class="form-control">
+                        <option value="">--Select--</option>
+                        <option value="M">Manager</option>
+                        <option value="TL">Team Leader</option>
+                        <option value="D">Developer</option>
+                    </select>
+                </div>
+                <div class="col-3">
+                    <label for="">Salary</label>
+                    <input type="number" [(ngModel)]="employeeObj.salary" class="form-control" placeholder="Enter Your Salary">
+                </div>
+            </div>
+            <div class="row pt-3">
+                <div class="col-3 text-center">
+                    <button type="button" class="btn btn-secondary">Reset</button>
+                </div>
+                <div class="col-3 text-center">
+                    @if (employeeObj.employeeId == 0) {
+                       <button type="button" class="btn btn-success" (click)="onSaveEmployee()">Submit</button>
+                    }
+                    @else {
+                       <button type="button" class="btn btn-success" (click)="onUpdate()">Update</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
